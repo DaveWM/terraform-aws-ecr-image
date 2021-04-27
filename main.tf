@@ -14,6 +14,9 @@ data "external" "build_dir" {
 resource "null_resource" "ecr_image" {
   triggers = {
     build_folder_content_md5 = data.external.build_dir.result.md5
+    dockerfile_dir = var.dockerfile_dir
+    ecr_repository_url = var.ecr_repository_url
+    docker_image_tag = var.docker_image_tag
   }
 
   # Runs the build.sh script which builds the dockerfile and pushes to ecr
